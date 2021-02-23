@@ -7,21 +7,24 @@
         filled
         v-model="name"
         label="Nom complet"
-        clearable:false
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
         />
 
       <q-input
         filled
         v-model="dni"
         label="DNI"
-        clearable:false
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
        />
 
        <q-input
         filled
         v-model="username"
         label="Usuari"
-        clearable:false
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
       />
 
       <q-input
@@ -29,6 +32,8 @@
         v-model="password"
         label="Contrasenya"
         type="password"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
       />
       <q-card-actions class="q-px-md">
             <q-btn unelevated color="primary" size="lg" class="full-width" label="Registra't" />

@@ -1,14 +1,15 @@
 <template>
   <q-page class="flex flex-center">
-
+<div>
   <div class="q-pa-md" style="max-width: 400px">
 
       <q-input
         filled
         v-model="username"
         label="Usuari"
-        hint="usuario"
-        readonly:true
+        hint="usuari"
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
       />
 
       <q-input
@@ -16,7 +17,8 @@
         v-model="password"
         label="Contrasenya"
         type="password"
-        clearable:false
+        lazy-rules
+        :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
       />
 
       <q-card-actions class="q-px-md">
@@ -27,7 +29,7 @@
           </q-card-section>
 
   </div>
-
+</div>
   </q-page>
 </template>
 <script>
