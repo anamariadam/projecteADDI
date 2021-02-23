@@ -5,7 +5,7 @@
 
       <q-input
         filled
-        v-model="name"
+        v-model="full_name"
         label="Nom complet"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
@@ -50,7 +50,7 @@ export default {
   name: 'Login',
   data () {
     return {
-      name: '',
+      full_name: '',
       dni: '',
       username: '',
       password: ''
