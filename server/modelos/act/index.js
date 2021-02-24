@@ -19,52 +19,16 @@ https.createServer({
     console.log("Servidor HTTPS escoltant al port" + PORT + "...");
   });
   
-  const authenticateJWT = (req, res, next) => {
-    const authHeader = req.headers.authorization;
-        if(authHeader) {
-            const token = authHeader.split('')[1];
-            jwt.verify(token, accessTokenSecret, (err, user) => {
-                if(err) {
-                    return res.sendStatus(403);
-                }
-                req.user = user;
-                next();
-            });
-        }else{   
-            res.sendStatus(401);
-        }
-};
 
 app.get('/bienvenida', (req, res) => {res.send('Hola, bienvenido/a');});
 
 app.post('/login', (req,res) => {
     var usr = new Users.Users();
-    usr.userExists(req.body.username, req.body.password,(resposta)=>{
-        if (resposta) {
-            let autToken = jwt.sign({
-                username:req.body.username,
-                password:req.body.password
-            }, accessTokenSecret)
-            res.status(200).json({autToken});
-        }else{
-            res.status(400).send({ok:false, msg:"El usuario o password es incorrecto"});
-        }
-    });
+    usr.userExists(req.body.username, req.body.password,res);
+    
 });
 
-app.post('/register', (req, res) => {
-    const nuevo =usr1.insertUser (req.body.dni, req.body.username, req.body.password,req.body.full_name, (res)=>{
-        return new Promise(resolve,reject)
-    });
-    if (nuevo) {
-        let autToken = jwt.sign({
-            dni:dni,
-            username:username,
-            password:password,
-            full_name:full_name
-        }, accessTokenSecret)
-        res.status(200).json(autToken);
-    }else{
-        res.status(400).send({ok:false, msg:"El usuario no puede registrarse"});    
-    }
+app.post('/register', (req,res) => {
+    var usr = new Users.Users
+    usr.insertUser(req.body.username, req.body.password, req.body.full_name,req.body.dni,req.body.avatar,res,req);
 });

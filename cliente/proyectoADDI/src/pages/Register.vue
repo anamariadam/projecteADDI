@@ -16,7 +16,9 @@
         v-model="dni"
         label="DNI"
         lazy-rules
-        :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
+        :rules="[
+         val => val && val.length > 0  || 'No pot haber cadena buida',
+         val => isValid && val.length == 9 || 'Ha de contenir 8 numeros i 1 lletra']"
        />
 
        <q-input
@@ -34,6 +36,16 @@
         type="password"
         lazy-rules
         :rules="[ val => val && val.length > 0 || 'No pot haber cadena buida']"
+      />
+      <q-input
+        filled
+        v-model="passwordCompara"
+        label="Contrasenya"
+        type="password"
+        lazy-rules
+        :rules="[
+         val => val && val.length > 0  || 'No pot haber cadena buida',
+         val => val == password || 'No coincidix']"
       />
       <q-card-actions class="q-px-md">
             <q-btn unelevated color="primary" size="lg" class="full-width" label="Registra't" />
@@ -53,7 +65,14 @@ export default {
       full_name: '',
       dni: '',
       username: '',
-      password: ''
+      password: '',
+      passwordCompara: ''
+    }
+  },
+  computed: {
+    isValid () {
+      const exp = new RegExp('[0-9]{8}[A-Z]')
+      return exp.test(this.dni)
     }
   }
 }
