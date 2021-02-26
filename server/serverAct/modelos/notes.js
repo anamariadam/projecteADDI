@@ -3,21 +3,7 @@ const jwt = require('jsonwebtoken');
 const accessTokenSecret ='melon';
 const refreshTokenSecret ='sandia';
 const refreshTokens = [];
-const authAlu =(req, res, next)=>{
-    if(req.user.role == 'alumne'){
-        next()
-    } else {
-        return res.sendStatus(403); 
-    }
-}
 
-const authProf =(req, res, next)=>{
-    if(req.user.role == 'profe'){
-        next()
-    } else {
-        return res.sendStatus(403); 
-    }
-}
 
 const authenticateJWT =(req, res, next)=>{
     // arrepleguem el JWT d'autorització
@@ -66,7 +52,7 @@ class Notes{
                         }
                     })  
                 })
-                res.status(200).send({notas})
+                res.status(200).send({OK:true,notas})
             }
         });
     }
@@ -93,7 +79,7 @@ class Notes{
                         }
                     })  
                 })
-                res.status(200).send({notas})
+                res.status(200).send({OK:true,notas})
             }
         });
     }
@@ -110,7 +96,7 @@ class Notes{
                 });
             } else{
                 var notas = []
-                res.status(200).send({results})
+                res.status(200).send({OK:true,results})
             }
         });
     }
@@ -137,7 +123,7 @@ class Notes{
                         hores:r.hores
                     })  
                 })
-                res.status(200).send({notas})
+                res.status(200).send({OK:true,notas})
             }
         });
     }
@@ -164,7 +150,7 @@ class Notes{
                     resul.push(r)
                 })
             }
-            res.status(200).send({resul})
+            res.status(200).send({OK:true,resul})
         })
     }
 
