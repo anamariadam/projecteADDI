@@ -134,3 +134,21 @@ app.get('/alumne/:id', authenticateJWT,(req,res)=>{
   var id = req.params.id
   alum.getAlu(id,res)
 })
+
+app.post('/missatgealalu/:idAlu', authenticateJWTProf,(req,res)=> {
+  var sendiSms = new Users.Users()
+  var idAlumne = req.params.idAlu
+  var idProf = req.user.id
+  var sms = req.body.missatge
+  var orig = req.user.role
+  sendiSms.sendSMS(idAlumne,idProf, sms, orig, res)
+})
+
+app.post('/missatgealprof/:idProf', authenticateJWTAlu,(req,res)=> {
+  var sendiSms = new Users.Users()
+  var idAlumne = req.user.id
+  var idProf = req.params.idProf
+  var sms = req.body.missatge
+  var orig = req.user.role
+  sendiSms.sendSMS(idAlumne,idProf, sms, orig, res)
+})

@@ -34,12 +34,13 @@ class Users{
         conn.query(sql,[username,password],function(err,results){
             if (err){
                 console.log(err);
-                res.status(401).send({
+                res.status(500).send({
                     OK:false,
-                    error:"Error logeando"+err
+                    error:"Error en la sentencia"
                 });
             }
             else{
+                if (results.length > 0){
                 let id = results[0].id
                 sql = "select * from alumne where id_alumne=?"
                 conn.query(sql,[id],(err,results)=>{
@@ -75,8 +76,15 @@ class Users{
                         result:"profesor logeado",
                         token:autToken
                         });        
-                    } 
-                });       
+                    }
+                
+                }); 
+            }else{
+                res.status(400).send({
+                    OK:false,
+                    error:"Error logeando"
+                });
+            }       
             }      
         });
     }
@@ -88,7 +96,7 @@ class Users{
         conn.query(sql,[username,password,full_name,avatar],(err,results)=>{
             if (err){
                 console.log(err);
-                res.status(401).send({
+                res.status(400).send({
                 OK:false,
                 error:"Error insertando datos"+err
                 });
@@ -101,7 +109,7 @@ class Users{
                     sql = "INSERT INTO professor (id_professor) VALUES (?)"
                     conn.query(sql,[id],(err,results)=>{
                         if (err){
-                            res.status(401).send({
+                            res.status(400).send({
                             OK:false,
                             error:"Error al insertar profesor"+err
                             });
@@ -160,12 +168,27 @@ class Users{
         let sql="SELECT * from alumne where id_alumne=? ";
         conn.query(sql,[id],function(err,results){
             if (err){
-                res.status(401).send({
+                res.status(400).send({
                     OK:false,
                     error:"Error"
                 });
             }else{
                 res.status(200).send({OK:true,results})
+            }
+        }
+    )}
+
+    sendSMS(idAlu,idProf,sms,orig,res){
+        let conn=this.mydb.getConnection();
+        let sql="insert into missatgeria (id_alumne, id_profe, missatge,orige) values (?,?,?,?)"
+        conn.query(sql,[idAlu,idProf,sms,orig],function(err,results){
+            if (err){
+                res.status(400).send({
+                    OK:false,
+                    error:"Error"
+                });
+            }else{
+                res.status(200).send({OK:true})
             }
         }
     )}

@@ -35,7 +35,7 @@ class Notes{
         con.query(sql, [idAlu], (err, results)=>{
             if(err){
                 console.log(err);
-                res.status(401).send({
+                res.status(400).send({
                     OK:false,
                     error:"Error mostrando notas"
                 });
@@ -63,7 +63,7 @@ class Notes{
         con.query(sql, [idAlu, idAssig], (err, results)=>{
             if(err){
                 console.log(err);
-                res.status(401).send({
+                res.status(400).send({
                     OK:false,
                     error:"Error el alumnoo no tiene esa asignatura"
                 });
@@ -90,7 +90,7 @@ class Notes{
         con.query(sql, [id], (err, results)=>{
             if(err){
                 console.log(err);
-                res.status(401).send({
+                res.status(400).send({
                     OK:false,
                     error:"Error "
                 });
@@ -107,7 +107,7 @@ class Notes{
         con.query(sql, [id], (err, results)=>{
             if(err){
                 console.log(err);
-                res.status(401).send({
+                res.status(400).send({
                     OK:false,
                     error:"Error el profe no tiene modulo"
                 });
@@ -135,7 +135,7 @@ class Notes{
         conn.query(sql, [idProf,idAss], (err, results)=>{
             if(err){
                 console.log(err);
-                res.status(401).send({
+                res.status(400).send({
                     OK:false,
                     error:"Error el profe no tiene modulo"
                 });
@@ -160,7 +160,7 @@ class Notes{
         con.query(sql, [idAss, idAlu, idProf,nota], (err, results)=>{
             if(err){
                 console.log(err);
-                res.status(401).send({
+                res.status(400).send({
                     OK:false,
                     error:"Error al modificar nota"
                 });
