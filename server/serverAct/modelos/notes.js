@@ -109,7 +109,7 @@ class Notes{
                 console.log(err);
                 res.status(400).send({
                     OK:false,
-                    error:"Error el profe no tiene modulo"
+                    error:"Error "
                 });
             } else{
                 var notas = []

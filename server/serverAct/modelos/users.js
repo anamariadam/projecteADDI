@@ -98,7 +98,7 @@ class Users{
                 console.log(err);
                 res.status(400).send({
                 OK:false,
-                error:"Error insertando datos"+err
+                error:"Error insertando datos"
                 });
             }
             else{
@@ -111,7 +111,7 @@ class Users{
                         if (err){
                             res.status(400).send({
                             OK:false,
-                            error:"Error al insertar profesor"+err
+                            error:"Error al insertar profesor"
                             });
                         }else{
                             let autToken = jwt.sign({
